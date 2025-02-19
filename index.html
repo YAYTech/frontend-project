@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- index.html frontend dosyasına Socket.IO istemcisi ekleyin -->
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js" integrity="sha512-8BHxHDLsOHx+flIrQ0DrZcea7MkHqRU5GbTHmbdzMRnAaoCIkZ97PqZcXJkKZckMMhqfoeaJE+DNUVuyoQsO3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<ul id="messages"></ul>
+<form action="">
+  <input id="m" autocomplete="off">
+  <button>Sent</button>
+</form>
+
+<script>
+  const socket = io("https://socket-api-1-6v0i.onrender.com"); // Sunucunun adresini yazın
+
+  $('form').submit(() => {
+    socket.emit('hello', $('#m').val())
+    $('#m').val('')
+    return false
+  })
+
+  socket.on('hello', (msg) => {
+    $('#messages').append('<li>' + msg + '</li>')
+  })
+</script>
+</body>
+</html>
